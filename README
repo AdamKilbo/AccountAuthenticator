@@ -1,0 +1,9 @@
+README
+
+Function of Program
+	- This is a program that will register users and allow users to log on, such as you will see on most user based websites.
+	- Currently all that is planned with this program is to make a system that will register users and allow registered users to log on. When I have the basic functionality accomplished, I will attempt the previous goals but with security in mind.
+
+Goal
+	- I am making this program to explore computer security in user authentication
+	- Additionally I am practice object oriented programming, since in previous programs I tended to have long and winding functions. This is an attempt to have short functions to accomplish each goal as well as following good style guidelines.
