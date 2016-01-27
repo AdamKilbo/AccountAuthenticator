@@ -38,10 +38,12 @@ class createUser:
 		print ("your password is", self.password)
 		return 0
 
-	# checks to ensure that user can exist (doesn't violate naming rules, username doesn't exist in database).
+	# checks to ensure that user can exist (doesn't violate naming rules, 
+	# username doesn't exist in database).
 	def checkUserRules(self):
 		if self.name and len(self.name) > 5:
 			self.usernameCheck = True
+		return 0
 		# WIP, only checks for username length
 
 	# checks password strength. If password is appropriately strong, returns 0. 
@@ -49,10 +51,28 @@ class createUser:
 	def checkPasswordRules(self):
 		if self.password and len(self.password) > 5:
 			self.passwordCheck = True
+		return 0
 		# WIP, add additional strength checks
 
+	# If bad username was inputted by user, this is used to prompt for good one.
+	def promptUsernameBad(self):
+		while self.usernameCheck == False:
+			print("Bad username, please try again")
+			self.promptUsername()
+			self.checkUserRules()
+		return 0
+
+	# If bad password was inputted by user, this is used to prompt for good one.
+	def promptPasswordBad(self):
+		while self.passwordCheck == False:
+			print("Bad password, please try again")
+			self.promptPassword()
+			self.checkPasswordRules()
+		return 0
+
 	def registerUser(self):
-		# The variable data is the JSON object constructed to hold the name and password of user account
+		# The variable data is the JSON object constructed to hold the name and 
+		# password of user account
 		data = {}
 		data['name'] = self.name
 		data['password'] = self.password
@@ -64,19 +84,7 @@ class createUser:
 		with open('accounts.txt', 'a') as outfile:
 			json.dump(data, outfile)
 
-	# If bad username was inputted by user, this is used to prompt for good one.
-	def promptUsernameBad(self):
-		while self.usernameCheck == False:
-			print("Bad username, please try again")
-			self.promptUsername()
-			self.checkUserRules()
-
-	# If bad password was inputted by user, this is used to prompt for good one.
-	def promptPasswordBad(self):
-		while self.passwordCheck == False:
-			print("Bad password, please try again")
-			self.promptPassword()
-			self.checkPasswordRules()
+		return 0
 
 	# This function controls the process of making a new account.
 	def createUserAccount(self):
@@ -88,7 +96,7 @@ class createUser:
 		self.checkUserRules()
 		# If not legal, prompt until legal username is inputted
 		if self.usernameCheck == False:
-			promptUsernameBad()
+			self.promptUsernameBad()
 
 
 		# Prompt for password for new account
@@ -97,12 +105,12 @@ class createUser:
 		self.checkPasswordRules()
 		# If not legal, prompt until legal password is inputted
 		if self.passwordCheck == False:
-			promptPasswordBad()
+			self.promptPasswordBad()
 
 
 		# Register the user/pass combo as a JSON element in a text file.
 		# Yes I know it is not secure, but that will come later.
-		registerUser()
+		self.registerUser()
 
 		return 0
 
