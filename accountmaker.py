@@ -1,6 +1,7 @@
 # This program will make a user account
 
 import json
+import base64
 
 # This class used in process of creating name and password for a user. 
 # Proposed name is stored in name. Proposed password is stored in password.
@@ -23,6 +24,17 @@ class createUser:
 		self.password = password
 		return 0
 
+	# thanks to stackoverflow user "smehmood" for this function
+	def encode(self, string):
+	    encoded_chars = []
+	    key = "Hello, World!"
+	    for i in xrange(len(string)):
+	        key_c = key[i % len(key)]
+	        encoded_c = chr(ord(string[i]) + ord(key_c) % 256)
+	        encoded_chars.append(encoded_c)
+	   	encoded_string = "".join(encoded_chars)
+	    return base64.urlsafe_b64encode(encoded_string)
+
 	# prompts user for a username
 	def promptUsername(self):
 		print ("input your username: ")
@@ -34,8 +46,12 @@ class createUser:
 	def promptPassword(self):
 		print ("input your password: ")
 		password = raw_input()
-		self.updatePassword(password)
-		print ("your password is", self.password)
+		print ("your unencrypted password is: ", password)
+
+		# Here we change the password when we store it.
+		self.updatePassword(self.encode(password))
+
+		print ("your encrypted password is ", self.password)
 		return 0
 
 	# checks to ensure that user can exist (doesn't violate naming rules, 
@@ -128,8 +144,15 @@ Future improvements:
 """
 
 """ 
-Things I learned:
+Things I learned/reflections:
 
 	- Python implicitly passes self object to class methods.
 	- general using OOP to have specific functions
+	- This is a little late into the program to learn this, but the I learned
+		in general that it is almost impossible to make a secure system by
+		yourself. Any encryption that I could come up with has probably already
+		been beaten in the security world. And teams of security experts still
+		cannot make a completely secure system no matter how hard they try.
+		I will finish the program, but I'll do a simple password disguise and
+		leave it at that. 
 """
