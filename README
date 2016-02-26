@@ -1,7 +1,8 @@
 README
 
 Note to viewers:
-	Do not use this program and expect it to be secure. The cryptographic keys are built into the program, and additionally the
+	- Currently incomplete.
+	- Do not use this program and expect it to be secure. The cryptographic keys are built into the program, and additionally the
 		function for decrypting the passwords is easily reversible from the encrypter functions. 
 
 Function of Program
